@@ -80,14 +80,14 @@
 		self.separatorView.hidden = YES;
 	}
 	
-	self.actionButton.frame = CGRectMake(CGRectGetWidth(self.sharingView.frame) - 55 - 10, CGRectGetHeight(self.sharingView.frame) - 32 - 5, 55, 32);
+	self.actionButton.frame = CGRectMake(CGRectGetWidth(self.sharingView.frame) - 55 - 10, CGRectGetHeight(self.sharingView.frame) - 32 - 20, 55, 32);
 }
 
 - (void)setupView
 {
 	self.alpha = 0;
 	self.userInteractionEnabled = YES;
-    
+
 	[self.sharingView addSubview:self.titleLabel];
 	[self.sharingView addSubview:self.separatorView];
 	[self.sharingView addSubview:self.descriptionLabel];
@@ -95,6 +95,8 @@
 	[self.sharingView addSubview:self.actionButton];
 	
 	[self addSubview:self.sharingView];
+    
+    self.descriptionExpanded = YES;
 }
 
 
@@ -281,12 +283,13 @@
 - (UIButton *)actionButton
 {
 	if (!_actionButton) {
-		_actionButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) - 55 - 10, CGRectGetHeight(self.frame) - 32 - 5, 55, 32)];
-		[_actionButton setTitle:NSLocalizedString(@"● ● ●", @"Title for Action button") forState:UIControlStateNormal];
+		_actionButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(self.frame) - 55 - 10, CGRectGetHeight(self.frame) - 32 - 20, 55, 32)];
+//		[_actionButton setTitle:NSLocalizedString(@"● ● ●", @"Title for Action button") forState:UIControlStateNormal];
 		[_actionButton setBackgroundColor:[UIColor clearColor]];
-		[_actionButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateNormal];
-		[_actionButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateHighlighted];
-		[_actionButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
+        [_actionButton setImage:[UIImage imageNamed:@"702-share.png"] forState:UIControlStateNormal];
+//		[_actionButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateNormal];
+//		[_actionButton setTitleColor:[UIColor colorWithWhite:0.9 alpha:0.9] forState:UIControlStateHighlighted];
+//		[_actionButton.titleLabel setFont:[UIFont boldSystemFontOfSize:14.0f]];
         
 		[_actionButton addTarget:self action:@selector(_actionButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 	}

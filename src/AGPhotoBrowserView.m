@@ -42,7 +42,7 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:[UIScreen mainScreen].bounds];
+    self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
 		[self setupView];
@@ -168,7 +168,9 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 
 - (void)show
 {
-    [[[UIApplication sharedApplication].windows lastObject] addSubview:self];
+    id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.window.rootViewController.view addSubview:self];
+//    [[[UIApplication sharedApplication].windows lastObject] addSubview:self];
 	
 	[UIView animateWithDuration:AGPhotoBrowserAnimationDuration
 					 animations:^(){
@@ -225,7 +227,7 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 
 - (void)sharingView:(AGPhotoBrowserOverlayView *)sharingView didTapOnSeeMoreButton:(UIButton *)actionButton
 {
-	CGSize descriptionSize = [sharingView.description sizeWithFont:sharingView.descriptionLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 40, MAXFLOAT)];
+	CGSize descriptionSize = [sharingView.description sizeWithFont:sharingView.descriptionLabel.font constrainedToSize:CGSizeMake(CGRectGetWidth(self.frame) - 40, MAXFLOAT)];
 	
 	CGRect currentOverlayFrame = self.overlayView.frame;
 	int newSharingHeight = CGRectGetHeight(currentOverlayFrame) -20 + ceil(descriptionSize.height);
@@ -340,7 +342,7 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 - (UIButton *)doneButton
 {
 	if (!_doneButton) {
-		int currentScreenWidth = CGRectGetWidth([[UIScreen mainScreen] bounds]);
+		int currentScreenWidth = CGRectGetWidth(self.frame);
 		_doneButton = [[UIButton alloc] initWithFrame:CGRectMake(currentScreenWidth - 60 - 10, 20, 60, 32)];
 		[_doneButton setTitle:NSLocalizedString(@"Done", @"Title for Done button") forState:UIControlStateNormal];
 		_doneButton.layer.cornerRadius = 3.0f;
@@ -361,7 +363,7 @@ const int AGPhotoBrowserThresholdToCenter = 150;
 - (UITableView *)photoTableView
 {
 	if (!_photoTableView) {
-		CGRect screenBounds = [[UIScreen mainScreen] bounds];
+		CGRect screenBounds = self.frame;
 		_photoTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetHeight(screenBounds), CGRectGetWidth(screenBounds))];
 		_photoTableView.dataSource = self;
 		_photoTableView.delegate = self;
