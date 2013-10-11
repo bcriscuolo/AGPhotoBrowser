@@ -12,8 +12,7 @@ It currently supports:
 - "Swipe up/down" to hide the photo browser
 - "Done/Action buttons" to dismiss the browser or perform a few operations on the selected image
 
-![1](https://s3-us-west-2.amazonaws.com/andreagiavatto.github.io/AGPhotoBrowser/01.png)
-![2](https://s3-us-west-2.amazonaws.com/andreagiavatto.github.io/AGPhotoBrowser/02.png)
+![1](https://s3-us-west-2.amazonaws.com/andreagiavatto.github.io/AGPhotoBrowser/AGPhotoBrowser.gif)
 
 ## Install
 - copy the content of the 'src' folder in your project
